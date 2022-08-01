@@ -19,14 +19,34 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Set the view's delegate
         sceneView.delegate = self
         
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        let world = createSphere(radius: 0.1, content: "world", vector: SCNVector3(0, 0.2, -1))
         
-        // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        let mars = createSphere(radius: 0.2, content: "mars", vector: SCNVector3(0.5, 0.2, -1))
         
-        // Set the scene to the view
-        sceneView.scene = scene
+        let venus = createSphere(radius: 0.15, content: "venus", vector: SCNVector3(1, 0.2, -1))
+        
+        sceneView.scene.rootNode.addChildNode(world)
+        sceneView.scene.rootNode.addChildNode(mars)
+        sceneView.scene.rootNode.addChildNode(venus)
+        
+        sceneView.automaticallyUpdatesLighting = true
+        
+    }
+    
+    func createSphere(radius : CGFloat, content : String, vector : SCNVector3) -> SCNNode{
+        
+        //let myBox = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
+        let mySphere = SCNSphere(radius: radius)
+        let boxMaterials = SCNMaterial()
+        boxMaterials.diffuse.contents = UIImage(named: "art/\(content)")
+        mySphere.materials = [boxMaterials]
+
+        let node = SCNNode()
+        node.position = vector
+        node.geometry = mySphere
+        
+        return node
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
