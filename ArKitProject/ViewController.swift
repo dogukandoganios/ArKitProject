@@ -19,7 +19,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Set the view's delegate
         sceneView.delegate = self
         
-        let world = createSphere(radius: 0.1, content: "world", vector: SCNVector3(0, 0.2, -1))
+        let world = createSphere(radius: 0.1, content: "world.png", vector: SCNVector3(0, 0.2, -1))
         
         let mars = createSphere(radius: 0.2, content: "mars", vector: SCNVector3(0.5, 0.2, -1))
         
@@ -38,7 +38,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         //let myBox = SCNBox(width: 0.1, height: 0.1, length: 0.1, chamferRadius: 0.01)
         let mySphere = SCNSphere(radius: radius)
         let boxMaterials = SCNMaterial()
-        boxMaterials.diffuse.contents = UIImage(named: "art/\(content)")
+        boxMaterials.diffuse.contents = UIImage(named: "art.scnassets/\(content)")
         mySphere.materials = [boxMaterials]
 
         let node = SCNNode()
